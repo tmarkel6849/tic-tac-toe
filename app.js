@@ -3,12 +3,9 @@ class Board {
     this.startBoard = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']];
     this.board = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']];
     this.piece = 'X';
-    this.plays = [];
+    this.count = 0;
   }
-  //Create a function that will produce a new board without refreshing the page
-  refreshBoard() {
-    this.board = this.startBoard;
-  }
+
   //function that toggles piece from 'X' to 'O'
   togglePiece() {
     if ( this.piece === 'X' ) {
@@ -22,9 +19,11 @@ class Board {
   placePiece(row, square) {
     let piece = this.piece;
      this.board[row][square] = this.piece;
-     if ( this.checkForWin(row, square, piece) ) console.log(`${this.piece} WINS!!!`);
+     if ( this.checkForWin(row, square, piece) )  {
+       return true;
+     }
      this.togglePiece();
-     return piece;
+     return;
   }
 
   winningRow(row, piece) {
@@ -94,7 +93,10 @@ class Board {
        child.textContent = '-';
      }
    }
-    this.board = this.startBoard;
+    for ( let i = 0; i < 3; i++ ) {
+      this.board[i] = this.startBoard[i].slice();
+    }
+    this.count = 0;
   }
 };
 

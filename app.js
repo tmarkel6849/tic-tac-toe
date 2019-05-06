@@ -34,7 +34,7 @@ class Board {
     let current = this.board[row];
     for ( let square of current ) {
       if ( square !== piece ) {
-        return 'No winner';
+        return null;
       }
     }
     return 'WINNER BY ROW!!!!';
@@ -43,13 +43,38 @@ class Board {
     for ( let i = 0; i < this.board.length; i++ ) {
       let row = this.board[i];
       if ( piece !== row[col] ) {
-        return 'No Winner'
+        return null;
       }
     }
     return 'WINNER BY COLUMN!!!!';
   }
-  winningDiagonal(row, col) {
-
+  winningDiagonal(piece) {
+    let currentBoard = this.board;
+    //not in middle of middle row
+    if ( currentBoard[0][0] === piece ) {
+      return this.leftDiagonal(piece);
+    } else if ( currentBoard[0][2] ) {
+      return this.rightDiagonal(piece);
+    }
+    return null;
+  }
+  leftDiagonal(piece) {
+    let diagonalBoard = this.board;
+    if ( diagonalBoard[1][1] === piece ) {
+      if (diagonalBoard[2][2] === piece ) {
+        return 'LEFT DIAGONAL WINNER!!!';
+      }
+    }
+    return null;
+  }
+  rightDiagonal(piece) {
+    let diagonalBoard = this.board;
+    if (diagonalBoard[1][1] === piece) {
+      if (diagonalBoard[2][0] === piece) {
+        return 'RIGHT DIAGONAL WINNER!!!';
+      }
+      return null;
+    }
   }
 };
   //

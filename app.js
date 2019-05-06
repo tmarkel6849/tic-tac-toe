@@ -58,20 +58,22 @@ class Board {
   }
 
   leftDiagonal(piece) {
-    let diagonalBoard = this.board;
-    if ( diagonalBoard[1][1] === piece ) {
-      if (diagonalBoard[2][2] === piece ) {
-        return 'LEFT DIAGONAL WINNER!!!';
+    if ( this.board[0][0] === piece ) {
+      if (this.board[1][1] === piece ) {
+        if ( this.board[2][2] === piece ){
+          return 'LEFT DIAGONAL WINNER!!!';
+        }
       }
     }
     return null;
   }
 
   rightDiagonal(piece) {
-    let diagonalBoard = this.board;
-    if (diagonalBoard[1][1] === piece) {
-      if (diagonalBoard[2][0] === piece) {
-        return 'RIGHT DIAGONAL WINNER!!!';
+    if ( this.board[0][2] === piece ) {
+      if ( this.board[1][1] === piece ) {
+        if ( this.board[2][0] === piece ) {
+          return 'RIGHT DIAGONAL WINNER!!!';
+        }
       }
     }
     return null;

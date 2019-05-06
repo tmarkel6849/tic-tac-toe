@@ -22,12 +22,9 @@ class Board {
   placePiece(row, square) {
     let piece = this.piece;
      this.board[row][square] = this.piece;
+     if ( this.checkForWin(row, square, piece) ) console.log(`${this.piece} WINS!!!`);
      this.togglePiece();
      return piece;
-  }
-  //Create helperfunctions to check if there is a winning game
-  checkWin() {
-    //move row by row checking for solutions?
   }
 
   winningRow(row, piece) {
@@ -39,6 +36,7 @@ class Board {
     }
     return 'WINNER BY ROW!!!!';
   }
+
   winningCol(col, piece) {
     for ( let i = 0; i < this.board.length; i++ ) {
       let row = this.board[i];
@@ -48,6 +46,7 @@ class Board {
     }
     return 'WINNER BY COLUMN!!!!';
   }
+
   winningDiagonal(piece) {
     let currentBoard = this.board;
     //not in middle of middle row
@@ -58,6 +57,7 @@ class Board {
     }
     return null;
   }
+
   leftDiagonal(piece) {
     let diagonalBoard = this.board;
     if ( diagonalBoard[1][1] === piece ) {
@@ -67,6 +67,7 @@ class Board {
     }
     return null;
   }
+
   rightDiagonal(piece) {
     let diagonalBoard = this.board;
     if (diagonalBoard[1][1] === piece) {
@@ -76,6 +77,14 @@ class Board {
     }
     return null;
   }
+
+  checkForWin = (row, col, piece) => {
+    if ( this.winningRow(row, piece) ) return true;
+     if ( this.winningCol(col, piece) ) return true;
+    if ( this.winningDiagonal(piece) ) return true;
+    return false;
+  }
+
   wipeBoard () {
    for (let i = 0; i < 3; i++) {
      let row = document.getElementsByClassName('row ' + i)[0];

@@ -7,7 +7,7 @@ class Board {
   }
   //Create a function that will produce a new board without refreshing the page
   refreshBoard() {
-    //look through DOM element attached to the board, update them to be blank
+    this.board = this.startBoard;
   }
   //function that toggles piece from 'X' to 'O'
   togglePiece() {
@@ -19,20 +19,37 @@ class Board {
   }
   //Create a function to place a piece one the board and update the DOM
     //needs to alternate between X and O for placements
-  placePiece(element) {
+  placePiece(element, row, square) {
     let piece = this.piece;
-    this.togglePiece();
-    return piece;
+     this.board[row][square] = this.piece;
+     this.togglePiece();
+     return this.board;
   }
   //Create helperfunctions to check if there is a winning game
-  // checkForWin() {
-  //   //needs to check for 'X' in a row for column and diagonal
-  //     //if X found, check down, across, diagonal
-  //       //if search of these returns an 'O' or nothing, break;
+  checkWin() {
+    //move row by row checking for solutions?
+  }
 
-  //       // let placement = current square, let row = placement.row, let col = placement. col
-  //       //loop over board row checking for 'X', if something else found break
-  //       //same but for column / diagonal;
-  //   }
+  winningRow(row, piece) {
+    let current = this.board[row];
+    for ( let square of current ) {
+      if ( square !== piece ) {
+        return 'No winner';
+      }
+    }
+    return 'WINNER BY ROW!!!!';
+  }
+  winningCol(col, piece) {
+    for ( let i = 0; i < this.board.length; i++ ) {
+      let row = this.board[i];
+      if ( piece !== row[col] ) {
+        return 'No Winner'
+      }
+    }
+    return 'WINNER BY COLUMN!!!!';
+  }
+  winningDiagonal(row, col) {
+
+  }
 };
   //

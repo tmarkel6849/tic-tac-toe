@@ -1,9 +1,9 @@
-//Set a blank board
-
 class Board {
   constructor() {
+    this.startBoard = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']];
     this.board = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']];
     this.piece = 'X';
+    this.plays = [];
   }
   //Create a function that will produce a new board without refreshing the page
   refreshBoard() {
@@ -19,11 +19,11 @@ class Board {
   }
   //Create a function to place a piece one the board and update the DOM
     //needs to alternate between X and O for placements
-  placePiece(element, row, square) {
+  placePiece(row, square) {
     let piece = this.piece;
      this.board[row][square] = this.piece;
      this.togglePiece();
-     return this.board;
+     return piece;
   }
   //Create helperfunctions to check if there is a winning game
   checkWin() {
@@ -73,8 +73,21 @@ class Board {
       if (diagonalBoard[2][0] === piece) {
         return 'RIGHT DIAGONAL WINNER!!!';
       }
-      return null;
     }
+    return null;
+  }
+  wipeBoard () {
+   for (let i = 0; i < 3; i++) {
+     let row = document.getElementsByClassName('row ' + i)[0];
+     let children = row.children;
+     for (let j = 0; j < children.length; j++) {
+       let child = children[j];
+       child.textContent = '-';
+     }
+   }
+    this.board = this.startBoard;
   }
 };
-  //
+
+
+let board = new Board();
